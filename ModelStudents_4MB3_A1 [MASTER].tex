@@ -1,0 +1,237 @@
+\documentclass[12pt]{article}
+
+\input 4mbapreamble
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FANCY HEADER AND FOOTER STUFF %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr,lastpage}
+\usepackage[makeroom]{cancel}
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer parameters
+%%%\lhead{Student Name: \theblank{4cm}}
+%%%\chead{}
+%%%\rhead{Student Number: \theblank{3cm}}
+%%%\lfoot{\small\bfseries\ifnum\thepage<\pageref{LastPage}{CONTINUED\\on next page}\else{LAST PAGE}\fi}
+\lfoot{}
+\cfoot{{\small\bfseries Page \thepage\ of \pageref{LastPage}}}
+\rfoot{}
+\renewcommand\headrulewidth{0pt} % Removes funny header line
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{center}
+{\bfseries Mathematics 4MB3/6MB3 Mathematical Biology\\
+\smallskip
+2017 ASSIGNMENT {\color{blue}1}}\\
+\medskip
+\underline{\emph{Group Name}}: \texttt{{\color{blue}Model Students}}\\
+\medskip
+\underline{\emph{Group Members}}: {\color{blue}Nicole Dumont, Melody Fong, Connor LeDrew, Carolina Weishaar}
+\end{center}
+
+\section{Analysis of the SI model}
+
+The SI model can be written
+%
+\begin{equation}\label{E:SI}
+  \frac{dI}{dt} = \beta I(N - I) \,,
+\end{equation}
+%
+where $I$ denotes prevalence and $N=S+I$ is the total population size.
+
+\begin{enumerate}[(a)]
+  \item Prove that the endemic equiliibrium (EE) is a globally asymptotically stable (GAS) equilibrium by finding an appropriate Lyapunov function.  Note that ``global'' here refers to all biologically relevant initial conditions except the (unstable) disease free equilibrium (DFE).  \\
+\emph{Hint:} Lyapunov functions often look paraboloidal. \\
+\emph{Note:} Notions of stability and Lyapunov functions were discussed in Math 3F03 Lecture 27 in 2013 (\url{http://www.math.mcmaster.ca/earn/3F03}).
+
+{\color{blue}
+\begin{proof}
+{\color{magenta}
+
+	The EE of ~\eqref{E:SI} is $I_* = N$.
+	Let $L$ be the function
+	
+	\begin{equation}\label{E:L}
+ 		L(I) = S^2 = (N-I)^2.
+	\end{equation}
+	
+	Since
+	
+	\begin{align}
+		L(I_*) &= 0 \\
+		L(I) &> 0 \quad \forall I \neq I_* \\
+		\dot{L}(I) &= -2I(N-I)^2 < 0 \quad \forall I \neq I_* ,
+	\end{align}
+	
+	$L$ is a strict Lyapunov function and $I_*$ is a globally asymptotically stable equilibrium.
+}
+\end{proof}
+}
+
+  \item In class we proved only stability of the EE, not asymptotic stability.  Prove GAS ``directly'' in two distinct ways: 
+\begin{enumerate}[(i)]
+\item find the exact solution of the model and take the limit as $t\to\infty$, and conclude that every solution that starts in the interval $(0,N)$ converges to the EE (this approach works only in situations where you can find the exact solution); 
+
+{\color{blue}
+\begin{proof}
+{\color{magenta}
+
+	\begin{align}
+		\frac{dI}{dt} &= \beta I(N - I) \\
+		 \int_{I_0}^{I} \frac{dI'}{I'(N-I')} &= \beta \int_{0}^{t}  dt' \\
+		\int_{I_0}^{I} \left ( \frac{1/N}{I'} + \frac{1/N}{N-I'} \right ) dI' &= \beta t \\
+		\frac{1}{N} \left ( \ln \left (\frac{I}{I_0} \right ) - \ln \left (\frac{N-I}{N-I_0} \right ) \right ) &= \beta t \\
+		\ln \left ( \frac{I(N-I_0)}{I_0(N-I)} \right ) &= \beta Nt \\
+		\frac{I}{N-I} &= \frac{I_0}{N-I_0} e^{\beta Nt} \\
+		I(t) &= \frac{NI_0e^{\beta Nt}}{N+I_0(e^{\beta Nt} -1)}
+	\end{align}
+
+	This is the exact solution of ~\eqref{E:SI}. Taking the limit as $t \rightarrow \infty$ and using L'Hôpital's rule gives
+
+	\begin{align}
+		\lim_{t\to\infty} \frac{NI_0e^{\beta Nt}}{N+I_0(e^{\beta Nt} -1)} &= \lim_{t\to\infty} \frac{N^{\cancel 2} \cancel{\beta I_0e^{\beta Nt}}}{\cancel{N \beta I_0e^{\beta Nt}} } \\
+													    &= N
+	\end{align}
+}
+\end{proof}
+}
+
+\item given $\epsilon>0$, prove that for any $I(0)\in(0,N)\ \exists t<\infty$ such that $I(t)\in[N-\epsilon,N)$ and use this to establish GAS (this approach also works for models that cannot be solved exactly).
+
+{\color{blue}
+\begin{proof}
+{\color{magenta}
+	
+	??
+}
+\end{proof}
+}
+
+\end{enumerate}
+\end{enumerate}
+
+\section{Analysis of the basic SIR  model}
+
+The basic SIR model is specified by the following system of differential equations.
+\begin{subequations}
+\begin{align}
+\frac{dS}{dt} &= -\R_0 SI \\
+\noalign{\vspace{5pt}}
+\frac{dI}{dt} &= \R_0 SI - I \\
+\noalign{\vspace{5pt}}
+\frac{dR}{dt} &= I
+\end{align}
+\end{subequations}
+The state variables $S$, $I$ and $R$ are the proportions of the population that are susceptible, infectious and removed, respectively.  The parameter $\R_0$ is the basic reproduction number.  The time unit has been chosen to be the mean infectious period for convenience.
+
+\begin{enumerate}[(a)]
+
+\item A quantity of some practical importance is the \term{peak prevalence} of disease in the population, \emph{i.e.,} the maximum proportion of the population that is simultaneously infected.  Find an exact expression for the peak prevalence, given initial conditions ($S_0,I_0$).  Why might a public health official want to know this quantity?
+
+{\color{blue}
+\begin{proof}[Solution]
+{\color{magenta}
+
+	Peak prevalence is an extrema of $I$ so it occurs when 
+	\begin{align}
+		\frac{dI}{dt} &= I(\R_0 S_p - 1) = 0 \\
+		S_p &= \frac{1}{\R_0}
+	\end{align}
+	Using the equation for the solution curves derived in class, one can find the peak prevalence.
+	\begin{align}
+		I + S - (I_0+S_0) &= \frac{1}{\R_0}\ln{\frac{S}{S_0}} \\
+		I_p + \frac{1}{\R_0} - (I_0+S_0) &= \frac{1}{\R_0}\ln{\frac{1}{\R_0 S_0}} \\
+		I_p &= (I_0+S_0) - \frac{1}{\R_0} \left (\ln{\R_0 S_0} +1 \right )
+	\end{align}
+
+}
+\end{proof}
+}
+
+\item It would be helpful to have an analytical expression for the solution of the model.  Most valuable would be a formula for $I(t)$, which is most closely related to time series data.  You probably will not find a formula for $I(t)$ (extra credit if you do!!) but it is definitely possible to find an exact expression that relates $R$ (proportion removed) and $t$ (time).
+
+\begin{enumerate}[(i)]
+
+\item Find such an expression.  \emph{Hint:} Combine the equations for $dS/dt$ and $dR/dt$ into one equation that can be reduced to an integral, and recall that $S+I+R=1$.  \emph{\underline{Note}:} You will end up with an expression for $t$ as a function of $R$, not $R$ as a function $t$.
+
+{\color{blue}
+\begin{proof}[Solution]
+{\color{magenta}
+
+	\begin{align}
+		\frac{dS}{dR} &= \frac{dS}{dt} \frac{dt}{dR} \\
+				     &= -\R_0 S \\
+		\int_{S_0}^{S} \frac{dS'}{S'} &= -\R_0 \int_{0}^{R} dR' \\
+		\ln{\frac{S}{S_0}} &= -\R_0 R \\
+		S &= S_0 e^{-\R_0 R} = 1 - R - \frac{dR}{dt} \\
+		\frac{dR}{dt} &= 1 - R - S_0 e^{-\R_0 R} \\
+		\int_{0}^{t} dt = t(R) &= \int_{0}^{R} \frac{dR'}{1 - R' - S_0 e^{-\R_0 R'}}
+	\end{align}
+
+}
+\end{proof}
+}
+
+\item Use your expression for $t(R)$ to find an expression for the time at which peak prevalence will occur.  Why might this be useful?
+
+{\color{blue}
+\begin{proof}[Solution]
+{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+\end{proof}
+}
+
+\item How could your expressions be used to compare with the time series for pneumonia and influenza in Philadelphia in 1918?  (Don't actually do it; just clearly explain your thinking including any assumptions you are making.)  Would you advise your assistant who just graduated with a degree in math and biology to do this (to help you prepare your report for the public health agency)?  Why or why not?
+
+{\color{blue}
+\begin{proof}[Answers]
+{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+Since no numerical analysis or graphics were requested, there is no need to use \Rlogo to answer these questions.  Note, incidentally, that the \verb|\Rlogo| command that produces \Rlogo simply includes the image file \texttt{images/Rlogo.pdf} and scales it appropriately for text within a paragraph.  If we really loved that logo and wanted to display as we would a figure, we easily could\dots
+\end{proof}
+}
+\begin{center}
+\scalebox{3}{
+\includegraphics{images/Rlogo.pdf}
+}
+\end{center}
+
+\item Is it possible to find an exact analytical expression for $t$ as a function $S$?
+  
+{\color{blue}
+\begin{proof}[Solution]
+{\color{magenta}
+
+	\begin{align}
+		\frac{dS}{dt} &= -\R_0 SI \\
+		&= -\R_0 S(1-S+\frac{1}{\R_0}\ln{\frac{S}{S_0}}) \\
+		\int_{0}^{t} dt = t(S) &= \int_{S_0}^{S} \frac{dS'}{-\R_0 S(1-S+\frac{1}{\R_0}\ln{\frac{S}{S_0}})}
+	\end{align}
+	This integral cannot be solved in terms of exact analytical expressions. 
+
+}
+\end{proof}
+}
+
+\end{enumerate}
+
+\item Prove that all solutions of the basic SIR model approach $I=0$ asymptotically, and explain why this makes biological sense.  \emph{Hint:} Is the function $L(S,I)=S+I$ a Lyapunov function?
+
+{\color{blue}
+\begin{proof}[Solution]
+{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+\end{proof}
+}
+
+\end{enumerate}
+
+
+\bigskip
+
+\centerline{\bf--- END OF ASSIGNMENT ---}
+
+\bigskip
+Compile time for this document:
+\today\ @ \thistime
+
+\end{document}
