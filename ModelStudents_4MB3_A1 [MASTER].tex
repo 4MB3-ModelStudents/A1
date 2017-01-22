@@ -169,6 +169,22 @@ The state variables $S$, $I$ and $R$ are the proportions of the population that 
 		\frac{dR}{dt} &= 1 - R - S_0 e^{-\R_0 R} \\
 		\int_{0}^{t} dt = t(R) &= \int_{0}^{R} \frac{dR'}{1 - R' - S_0 e^{-\R_0 R'}}
 	\end{align}
+	Since $R_0 R$ is small we can Taylor expand $e^{-\R_0 R'}$ to get
+	\begin{align}
+		t(R) &= \int_{0}^{R} \frac{dR'}{1 - S_0 + (S_0\R_0 -1)R' -\frac{1}{2}S_0\R_0^2R'^2} \\
+		&= \int_{0}^{R} \frac{dR'}{-\frac{1}{2}S_0\R_0^2 \left (R' - \frac{S_0\R_0 - 1}{S_0\R_0^2}  \right )^2  +1-S_0+\frac{(S_0\R_0 -1)^2}	{2S_0\R_0^2}  }
+	\end{align}
+	Let $u=\frac{1}{\sqrt{2}}\sqrt{S_0}\R_0 \left (R' - \frac{S_0\R_0 - 1}{S_0\R_0^2}  \right )$ and $du=\frac{1}{\sqrt{2}}\sqrt{S_0}\R_0 dR'$.
+	\begin{equation}
+		t(R) =\frac{\sqrt{2}}{\sqrt{S_0}\R_0} \frac{2S_0\R_0^2}{S_0\R_0^2(S_0-2)+2S_0\R_0 -1} \int \frac{du}{1+\frac{2S_0\R_0^2}{S_0\R_0^2(S_0-2)+2S_0\R_0 -1}u^2} 
+	\end{equation}
+	Let $v=\frac{\sqrt{2S_0}\R_0}{\sqrt{S_0\R_0^2(S_0-2)+2S_0\R_0 -1}}u$ and $dv=\frac{\sqrt{2S_0}\R_0}{\sqrt{S_0\R_0^2(S_0-2)+2S_0\R_0 -1}}du$.
+	\begin{align}
+		t(R) &= \frac{\sqrt{2}}{\sqrt{S_0\R_0^2(S_0-2)+2S_0\R_0 -1}} \int \frac{dv}{1+v^2}  \\
+		&= \frac{\sqrt{2}}{\sqrt{S_0\R_0^2(S_0-2)+2S_0\R_0 -1}} \tan ^{-1} \left ( \frac{S_0\R_0^2R' - S_0\R_0 +1}{\sqrt{S_0\R_0^2(S_0-2)+2S_0\R_0 -1}} \right ) \Bigl |_0^R \\
+		&= \frac{\sqrt{2}}{\sqrt{S_0\R_0^2(S_0-2)+2S_0\R_0 -1}} \Bigl ( \tan ^{-1} \left ( \frac{S_0\R_0^2R - S_0\R_0 +1}{\sqrt{S_0\R_0^2(S_0-2)+2S_0\R_0 -1}} \right )\\
+		&-\tan ^{-1} \left ( \frac{1 - S_0\R_0 }{\sqrt{S_0\R_0^2(S_0-2)+2S_0\R_0 -1}} \right )  \Bigl ) 
+	\end{align}
 
 }
 \end{proof}
@@ -178,7 +194,15 @@ The state variables $S$, $I$ and $R$ are the proportions of the population that 
 
 {\color{blue}
 \begin{proof}[Solution]
-{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+{\color{magenta}
+
+\begin{align}
+		R_p &= 1- \frac{2}{\R_0} - (I_0+S_0) - \frac{1}{\R_0} \ln{\R_0 S_0}  \\
+		t_p &= \frac{\sqrt{2}}{\sqrt{S_0\R_0^2(S_0-2)+2S_0\R_0 -1}} \Bigl ( \tan ^{-1} \left ( \frac{S_0\R_0^2 \left ( 1- \frac{2}{\R_0} - (I_0+S_0) - \frac{1}{\R_0} \ln{\R_0 S_0}  \right ) - S_0\R_0 +1}{\sqrt{S_0\R_0^2(S_0-2)+2S_0\R_0 -1}} \right )\\
+		&-\tan ^{-1} \left ( \frac{1 - S_0\R_0 }{\sqrt{S_0\R_0^2(S_0-2)+2S_0\R_0 -1}} \right )  \Bigl ) 
+	\end{align}
+
+}
 \end{proof}
 }
 
