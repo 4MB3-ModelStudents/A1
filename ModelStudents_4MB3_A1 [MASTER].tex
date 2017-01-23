@@ -104,7 +104,22 @@ where $I$ denotes prevalence and $N=S+I$ is the total population size.
 \begin{proof}
 {\color{magenta}
 	
-	??
+Note that: $\beta$ $\geq$ 0 and I(t) $\geq$ 0 $\forall$ t$\in$[0,$\inf$] for $\beta$ and I(t) defined in the biologically revelant space (i.e. transmission rate $\geq$ 0 and number of infected $\geq$ 0).
+
+\begin{equation}
+\frac{dI}{dt} = \beta I(N-I) = 0 
+\end{equation}
+
+$\therefore$ I = 0 and I = N are fixed points. For $\epsilon$ $>$ 0, I = N - $\epsilon$,
+
+\begin{align}
+\frac{dI}{dt} &= \beta (N-\epsilon)(N-N+\epsilon) \\
+&= \beta (N-\epsilon)(\epsilon) \\
+&\geq 0
+\end{align}
+
+So, given any $\epsilon$ $>$ 0 and I(t=0)$\in$(0,N), I = N - $\epsilon$ is monotonically increasing, converging to the fixed point I = N $\forall$ t$\in$[0,$\inf$) whenever I$\in$[N-$\epsilon$,N).
+
 }
 \end{proof}
 }
