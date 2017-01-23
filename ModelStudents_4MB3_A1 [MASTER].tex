@@ -262,7 +262,21 @@ The state variables $S$, $I$ and $R$ are the proportions of the population that 
 
 {\color{blue}
 \begin{proof}[Solution]
-{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+{\color{magenta}
+
+Let $L_a(S,I)=S+I$, \\
+i.$ L_a(S,I)$ $|_(S,0)=S$ and $L_a(S,I)$$>$0 $\forall$ S,I in the biologically revelant space. \\
+ii. $\dot{L_a}(S,I) = \frac{dS}{dt} + \frac{dI}{dt} = -\R_0 SI + \R_0 SI - I = -I < 0$ $\forall$ S,I in the biologically relevant space. \\
+
+$\therefore$ $L_a(S,I)=S+I$ is not a Lyapunov function in the traditional sense. \\
+
+Let $L_b(S,I)=I$, \\
+i. $L_b(S,I)$ $|_(S,0)=0$ and $L_b(S,I)$$>$0 $\forall$ S,I in the biologically revelant space. \\
+ii. $\dot{L_b}(S,I) = \frac{dI}{dt} = \R_0 SI - I$ \\
+
+Note that$ L_b(S,I)=I$ is also not a Lyapunov function, only when $\dot{L_b}(S,I) \leq 0$ will the conditions hold, proving that I=0 is an asymptotically stable point of equilibrium. This occurs in the combination of the two cases when, in $L_a$, the number of susceptibles is equal to zero (i.e. S=0), as in$ L_b$. Since $\frac{dS}{dt} \leq 0 \forall$ t$\leq \inf$ and all presented equations are bound in [0,N] in the biologically relevant space, therefore S approaches zero for all t. This situation is akin to the one presented in $L_b$, $\frac{dI}{dt} > 0$ until it peaks at $I_p$ (as shown in part (a)) where $\frac{dI}{dt} = 0$.
+
+}
 \end{proof}
 }
 
